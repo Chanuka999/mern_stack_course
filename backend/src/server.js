@@ -3,10 +3,10 @@ import noteRoutes from "./routes/noteRoutes.js";
 import { ConnectDb } from "./config/db.js";
 import dotenv from "dotenv";
 import rateLimiter from "./middleware/rateLimiter.js";
-
+import cors from "cors";
 const app = express();
 dotenv.config();
-app.use(express.json());
+
 const PORT = process.env.PORT || 5001;
 
 app.use((req, res, next) => {
@@ -14,7 +14,13 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 app.use(rateLimiter);
+app.use(express.json());
 app.use("/api/notes", noteRoutes);
 
 ConnectDb().then(() => {

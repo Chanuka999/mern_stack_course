@@ -1,7 +1,7 @@
 import express from "express";
 import {
   createANote,
-  deleteAnote,
+  deleteNote,
   getAllNotes,
   getNoteById,
   updateNote,
@@ -13,6 +13,6 @@ router.get("/", getAllNotes);
 router.get("/:id", getNoteById);
 router.post("/", createANote);
 router.put("/:id", updateNote);
-router.delete("/:id", deleteAnote);
+router.delete("/:id", deleteNote);
 
 export default router;
